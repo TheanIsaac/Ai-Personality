@@ -1,0 +1,36 @@
+/* src/components/DevResponseHandler.css */
+
+.dev-response-handler-container {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .dev-response-handler-container textarea {
+    width: 80%;
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .dev-response-handler-container input[type="number"] {
+    width: 50px;
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .dev-buttons {
+    display: flex;
+    gap: 1rem;
+  }
+  
+  .dev-buttons button {
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+  }
+  
+  .error {
+    color: red;
+    margin-top: 0.5rem;
+  }
+  

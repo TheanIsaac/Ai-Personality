@@ -1,0 +1,14 @@
+/* src/components/Question.css */
+
+.question-container {
+    background-color: #fff3cd;
+    padding: 20px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+  }
+  
+  .question-container h2 {
+    margin-bottom: 10px;
+    color: #856404;
+  }
+  

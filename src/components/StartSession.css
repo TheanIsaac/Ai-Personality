@@ -1,0 +1,43 @@
+/* src/components/StartSession.css */
+
+.start-session {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 5px;
+  }
+  
+  .start-session form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .start-session label {
+    margin-bottom: 10px;
+    font-size: 1.2em;
+  }
+  
+  .start-session input {
+    padding: 10px;
+    font-size: 1em;
+    width: 80%;
+    max-width: 300px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .start-session button {
+    padding: 10px 20px;
+    font-size: 1em;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .start-session button:hover {
+    background-color: #45a049;
+  }
+  
