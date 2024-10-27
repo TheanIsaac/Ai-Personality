@@ -1,0 +1,75 @@
+// utils/scoreCalculator.js
+
+/**
+ * Mapping of domains to their corresponding facets.
+ */
+const domainFacetMap = {
+  "Honesty-Humility": [
+    "Sincerity",
+    "Fairness",
+    "Greed-Avoidance",
+    "Modesty"
+  ],
+  "Emotionality": [
+    "Fearfulness",
+    "Anxiety",
+    "Dependence",
+    "Sentimentality"
+  ],
+  "Extraversion": [
+    "Social Self-Esteem",
+    "Social Boldness",
+    "Sociability",
+    "Liveliness"
+  ],
+  "Agreeableness": [
+    "Forgivingness",
+    "Gentleness",
+    "Flexibility",
+    "Patience"
+  ],
+  "Conscientiousness": [
+    "Organization",
+    "Diligence",
+    "Perfectionism",
+    "Prudence"
+  ],
+  "Openness to Experience": [
+    "Aesthetic Appreciation",
+    "Inquisitiveness",
+    "Creativity",
+    "Unconventionality"
+  ],
+  "Interstitial": [
+    "Altruism (versus Antagonism)"
+  ]
+};
+
+/**
+ * Calculates domain scores by aggregating facet scores.
+ * @param {Object} facetScores - An object where keys are facet names and values are their scores.
+ * @returns {Object} domainScores - An object where keys are domain names and values are total scores.
+ */
+function calculateScores(facetScores) {
+  const domainScores = {};
+
+  for (const [domain, facets] of Object.entries(domainFacetMap)) {
+    let total = 0;
+    facets.forEach(facet => {
+      const score = facetScores[facet];
+      if (score !== undefined && typeof score === 'number') {
+        total += score;
+      } else {
+        // Handle cases where a facet might be missing or invalid
+        console.warn(`Score for facet "${facet}" is missing or invalid. Assuming 0.`);
+      }
+    });
+    domainScores[domain] = total;
+  }
+
+  return domainScores;
+}
+
+module.exports = {
+  calculateScores
+};

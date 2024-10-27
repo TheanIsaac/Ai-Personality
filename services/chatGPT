@@ -1,0 +1,60 @@
+// services/chatgptService.js
+
+const axios = require('axios');
+
+async function getScore(transcript, facet) {
+  try {
+    console.log(`Sending transcript to ChatGPT API: ${transcript}`);
+
+    const payload = {
+      model: 'gpt-4o-mini', // Use GPT-4 for better performance
+      messages: [
+        { 
+          role: 'system', 
+          content: `You are a Personality Test Rater GPT designed to evaluate employee responses based on the HEXACO personality model. For each provided response, assess how well it exhibits a specific HEXACO personality facet. Rate the response on a scale from 1 to 5, where:
+1 = Strongly Disagree
+2 = Disagree
+3 = Neutral
+4 = Agree
+5 = Strongly Agree
+
+Provide only the numerical rating. If the response lacks sufficient detail to assign a rating, ask a clarifying follow-up question.` 
+        },
+        { 
+          role: 'user', 
+          content: `Facet: ${facet}
+
+Response: "${transcript}"
+
+Please provide a rating from 1 to 5 indicating how much this response exhibits the ${facet} facet.` 
+        },
+      ],
+      temperature: 0, // Ensures more deterministic responses
+    };
+
+    const response = await axios.post(
+      'https://api.openai.com/v1/chat/completions',
+      payload,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
+        },
+      }
+    );
+
+    if (response.data && response.data.choices && response.data.choices.length > 0) {
+      console.log('ChatGPT API response received');
+      return response.data.choices[0].message.content.trim();
+    } else {
+      throw new Error('Invalid response from ChatGPT API');
+    }
+  } catch (error) {
+    console.error('Error sending transcript to ChatGPT API:', error.response ? error.response.data : error.message);
+    throw new Error('Failed to process transcript with ChatGPT API.');
+  }
+}
+
+module.exports = {
+  getScore,
+};
